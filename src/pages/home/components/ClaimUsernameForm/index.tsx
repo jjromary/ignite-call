@@ -18,9 +18,12 @@ type claimUsernameFormData = z.infer<typeof claimUserNameForSchema>
 
 export function ClaimUsernameForm() {
 
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<claimUsernameFormData>({
-    resolver: zodResolver(claimUserNameForSchema),
-  })
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting } } = useForm<claimUsernameFormData>({
+      resolver: zodResolver(claimUserNameForSchema),
+    })
 
   const router = useRouter()
 
