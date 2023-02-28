@@ -5,7 +5,7 @@ import { ArrowRight, Check } from "phosphor-react";
 import { Container, Header } from "../styles";
 import { AuthError, ConnectItem, ConnnectBox } from "./styles";
 
-export default function Register() {
+export default function ConnectCalendar() {
   async function handleConnectCalendar() {
     signIn("google");
   }
@@ -50,7 +50,7 @@ export default function Register() {
         {hasAuthError && (
           <AuthError size="sm">
             Falha ao se conectar ao Google, verifque se você habilitou as
-            poermiss~çoes de acesso ao Google Calendar.
+            permições de acesso ao Google Calendar.
           </AuthError>
         )}
 
