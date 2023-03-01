@@ -3,6 +3,7 @@ import { Button, Checkbox, Heading, MultiStep, Text, TextInput } from "@ignite-u
 import { ArrowRight } from "phosphor-react";
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { z } from "zod";
+import { convertTimeStringToMinutes } from "../../../utils/convert-time-string-to-minutes";
 import { getWeekDays } from "../../../utils/get-week-days";
 import { Container, Header } from "../styles";
 import { FormError, IntervalBox, IntervalContainer, IntervalDay, IntervalInputs, IntervalItem } from "./styles";
@@ -20,8 +21,25 @@ const timeIntervalsFormSchema = z.object({
     .refine(intervals => intervals.length > 0, {
       message: 'Você precisa selecionar pelo menos 1 dia da semana.'
     })
+    .transform((intervals) => {
+      return intervals.map((interval) => {
+        return {
+          weekday: interval.weekday,
+          startTimeMinutes: convertTimeStringToMinutes(interval.startTime),
+          endTimeMInutes: convertTimeStringToMinutes(interval.endTime),
+        }
+      })
+    })
+    .refine(intervals => {
+      return intervals.every(interval => interval.endTimeMInutes - 60 >= interval.startTimeMinutes)
+    }, {
+      message: 'O horário de término deve ser poelo menos 1 hora distante do início.'
+    })
   ,
 })
+
+type TimeIntervalsFormInput = z.input<typeof timeIntervalsFormSchema>
+type TimeIntervalsFormOutput = z.output<typeof timeIntervalsFormSchema>
 
 type TimeIntervalsFormData = z.infer<typeof timeIntervalsFormSchema>
 
