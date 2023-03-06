@@ -12,7 +12,7 @@ import { Container, Form, FormError, Header } from "./styles";
 const registerFormSchema = z.object({
   username: z
     .string()
-    .min(2, { message: "O usuário recisa ter pelo menos 3 letras" })
+    .min(3, { message: "O usuário recisa ter pelo menos 3 letras" })
     .regex(/^([a-z\\\\-]+)$/i, {
       message: "O usuário pode ter apenas letras e hifens",
     })

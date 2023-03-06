@@ -6,15 +6,20 @@ import { Container, Header } from "../styles";
 import { AuthError, ConnectItem, ConnnectBox } from "./styles";
 
 export default function ConnectCalendar() {
-  async function handleConnectCalendar() {
-    signIn("google");
-  }
 
   const session = useSession();
   const router = useRouter();
 
   const hasAuthError = !!router.query.error;
   const isSignedIn = session.status === "authenticated";
+
+  async function handleConnectCalendar() {
+    signIn("google");
+  }
+
+  async function handleNavigateToNextStep() {
+    await router.push('/register/time-intervals')
+  }
 
   return (
     <Container>
@@ -54,7 +59,7 @@ export default function ConnectCalendar() {
           </AuthError>
         )}
 
-        <Button type="submit" disabled={!isSignedIn}>
+        <Button type="submit" onClick={handleNavigateToNextStep} disabled={!isSignedIn}>
           Próximo passo
           <ArrowRight />
         </Button>
