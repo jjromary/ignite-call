@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Checkbox, Heading, MultiStep, Text, TextInput } from "@ignite-ui/react";
-import router from "next/router";
+import { useRouter } from "next/router";
 import { ArrowRight } from "phosphor-react";
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 import { z } from "zod";
@@ -69,6 +69,7 @@ export default function TimeIntervals() {
   })
 
   const weekDays = getWeekDays()
+  const router = useRouter()
 
   const { fields } = useFieldArray({
     name: 'intervals',
