@@ -35,8 +35,8 @@ export function CalendarStep() {
   },
     {
       enabled: !!selectedDate,
-    })
-
+    }
+  )
 
   return (
     <Container isTimePickerOpen={isDateSelected}>
