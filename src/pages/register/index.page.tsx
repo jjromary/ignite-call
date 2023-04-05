@@ -22,7 +22,7 @@ const registerFormSchema = z.object({
     .min(3, { message: "O nome presica ter pleo menos 3 letras" }),
 });
 
-type RegisterFormDatta = z.infer<typeof registerFormSchema>;
+type RegisterFormData = z.infer<typeof registerFormSchema>;
 
 export default function Register() {
   const {
@@ -30,7 +30,7 @@ export default function Register() {
     handleSubmit,
     setValue,
     formState: { errors, isSubmitting },
-  } = useForm<RegisterFormDatta>({
+  } = useForm<RegisterFormData>({
     resolver: zodResolver(registerFormSchema),
   });
 
@@ -42,7 +42,7 @@ export default function Register() {
     }
   }, [router.query?.username, setValue]);
 
-  async function handleRegister(data: RegisterFormDatta) {
+  async function handleRegister(data: RegisterFormData) {
     try {
       await api.post("users", {
         name: data.name,
