@@ -47,6 +47,7 @@ export default async function handle(
       EXTRACT(DAY FROM S.date) AS date,
       COUNT(S.date) AS amount,
       ((UTI.time_end_in_minutes - UTI.time_start_in_minutes) / 60) AS size
+      
     FROM schedulings S   
 
     LEFT JOIN user_time_intervals UTI 
@@ -59,7 +60,6 @@ export default async function handle(
       ((UTI.time_end_in_minutes - UTI.time_start_in_minutes) / 60)
 
     HAVING amount >= size
-        or size = 0
   `;
 
   const blockedDates = blockedDatesRaw.map((item) => item.date);
